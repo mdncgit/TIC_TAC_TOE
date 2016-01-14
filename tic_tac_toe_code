@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+<head>
+	<title>That is my game </title>
+	<style>
+	
+	body{
+
+	text-align:center;
+	
+}
+
+
+
+#textarea{
+	margin-top:40px;
+	margin-right:600px;
+
+}
+h1{
+
+	position:relative;
+    color:blue;
+    border:1px solid red;
+    border-radius: 60px;
+	
+}
+
+h2{
+
+	position:relative;
+ 
+	
+}
+
+canvas{
+
+	position:relative;
+	
+}
+
+
+	</style>
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"> </script>
+	<script>
+	
+	ar turn = 0;
+var indexCanvas;
+
+var paintedblock
+var c;
+var p;
+var contentofblock;
+var winningcombinations;
+var Filledblocks = 0;
+//Instanciate Arrays
+window.onload=function(){
+	
+	 paintedblock = new Array();
+	 contentofblock = new Array();
+	 winningcombinations = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
+	for(var a = 0; a <= 8; a++){
+		content[a]='';
+	paintedblock[a] = false;
+	}
+
+}
+
+ //methods for the game
+function canvasonclick(CanvasNumber){
+	indexCanvas = "canvas"+CanvasNumber;
+	c = document.getElementById(indexCanvas);
+	p = c.getContext("2d");
+indicator=0;
+	if(paintedblock[CanvasNumber] ==false){
+		if(turn%2==0){
+			p.beginPath();
+			p.moveTo(10,10);
+			p.lineTo(50,50);
+			p.moveTo(50,10);
+			p.lineTo(10,50);
+			p.strokeStyle="orange";
+			p.stroke();
+			p.closePath();
+			contentofblock[CanvasNumber] = 'X';
+		}
+
+		else{
+			p.beginPath();
+			p.arc(30,30,26,0,Math.PI*2,true);
+			p.strokeStyle="green";
+			p.stroke();
+			p.closePath();
+			contentofblock[CanvasNumber] = 'O';
+		}
+
+		turn++;
+		paintedblock[CanvasNumber] = true;
+		Filledblocks++;
+		checkforawinner(contentofblock[CanvasNumber]);
+
+		if(Filledblocks==9&&indicator==0){
+			alert("No winner!");
+			location.reload(true);
+		}
+	
+	}
+	else{
+		alert("You have already selected this");
+	}
+
+}
+
+function checkforawinner(symbol){
+	
+	for(var a = 0; a < winningcombinations.length; a++){
+	if(contentofblock[winningcombinations[a][0]]==symbol&&contentofblock[winningcombinations[a][1]]==	symbol&&contentofblock[winningcombinations[a][2]]==symbol){
+		if(turn%2!=0)
+		{
+
+		alert("Player 1 Won");
+	}
+	else alert("Player 2 Won");
+		playAgain();
+		indicator=1;
+	}
+	}
+
+}
+
+function playAgain(){
+	y=confirm("PLAY AGAIN?");
+	if(y==true){
+		location.reload(true);
+	}
+	else{
+		alert("Ok");
+}
+
+}
+
+</script>
+</head>
+<body>
+
+			<h1>PLAY</h1><h2>TIC-TAC-TOE</h2>
+		<br>
+		</br>
+		<div id ="box">
+			<canvas id = "canvas0"  width="60" height="60" style="border:3px solid blue" onclick="canvasonclick(0)"></canvas>
+			<canvas id = "canvas1"  width="60" height="60" style="border:3px solid blue" onclick="canvasonclick(1)"></canvas>
+			<canvas id = "canvas2"  width="60" height="60" style="border:3px solid blue" onclick="canvasonclick(2)"></canvas><br/>
+			<canvas id = "canvas3"  width="60" height="60" style="border:3px solid blue" onclick="canvasonclick(3)"></canvas>
+			<canvas id = "canvas4"  width="60" height="60" style="border:3px solid blue" onclick="canvasonclick(4)"></canvas>
+			<canvas id = "canvas5"  width="60" height="60" style="border:3px solid blue" onclick="canvasonclick(5)"></canvas><br/>
+			<canvas id = "canvas6"  width="60" height="60" style="border:3px solid blue" onclick="canvasonclick(6)"></canvas>
+			<canvas id = "canvas7"  width="60" height="60" style="border:3px solid blue" onclick="canvasonclick(7)"></canvas>
+			<canvas id = "canvas8"  width="60" height="60" style="border:3px solid blue" onclick="canvasonclick(8)"></canvas>
+		</div>
+
+</body>
+</html>
