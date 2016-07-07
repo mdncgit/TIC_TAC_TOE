@@ -30,7 +30,6 @@ h2{
 
 	position:relative;
  
-	
 }
 
 canvas{
@@ -44,21 +43,21 @@ canvas{
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"> </script>
 	<script>
 	
-	ar turn = 0;
+var turn = 0;
 var indexCanvas;
 
-var paintedblock
+var paintedblock;
 var c;
 var p;
 var contentofblock;
 var winningcombinations;
 var Filledblocks = 0;
-//Instanciate Arrays
+//Initialize the Arrays
 window.onload=function(){
 	
 	 paintedblock = new Array();
-	 contentofblock = new Array();
-	 winningcombinations = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+         contentofblock = new Array();
+     	winningcombinations = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 
 	for(var a = 0; a <= 8; a++){
 		content[a]='';
@@ -67,12 +66,12 @@ window.onload=function(){
 
 }
 
- //methods for the game
+ //methods which will be used
 function canvasonclick(CanvasNumber){
 	indexCanvas = "canvas"+CanvasNumber;
 	c = document.getElementById(indexCanvas);
 	p = c.getContext("2d");
-indicator=0;
+        indicator=0;
 	if(paintedblock[CanvasNumber] ==false){
 		if(turn%2==0){
 			p.beginPath();
@@ -115,7 +114,7 @@ indicator=0;
 function checkforawinner(symbol){
 	
 	for(var a = 0; a < winningcombinations.length; a++){
-	if(contentofblock[winningcombinations[a][0]]==symbol&&contentofblock[winningcombinations[a][1]]==	symbol&&contentofblock[winningcombinations[a][2]]==symbol){
+	if(contentofblock[winningcombinations[a][0]]==symbol&&contentofblock[winningcombinations[a][1]]==   symbol&&contentofblock[winningcombinations[a][2]]==symbol){
 		if(turn%2!=0)
 		{
 
